@@ -21,103 +21,27 @@ CodeIgniter4 Boilerplatecompanies CRUD MVC contain capture storages for inventor
 
 	composer require julio101290/boilerplatecompanies
 
+  	composer require julio101290/boilerplatestorages
+
 ### Run command for migration and seeder
 
 	php spark boilerplatecompanies:installcompaniescrud
 
  	php spark boilerplatelog:installlog
 
- ### BaseController.php Config
+  	php spark boilerplatestorages:installstorages
 
- Add SAT Catalogos Factory and use global variabes from conection DNS with SQLite
+# Make the Menu
 
- like
-
-	 <?php
-	
-	namespace App\Controllers;
-	
-	use CodeIgniter\Controller;
-	use CodeIgniter\HTTP\CLIRequest;
-	use CodeIgniter\HTTP\IncomingRequest;
-	use CodeIgniter\HTTP\RequestInterface;
-	use CodeIgniter\HTTP\ResponseInterface;
-	use Psr\Log\LoggerInterface;
- 	//ADD
-	use PhpCfdi\SatCatalogos\Factory;
-	
-	/**
-	 * Class BaseController
-	 *
-	 * BaseController provides a convenient place for loading components
-	 * and performing functions that are needed by all your controllers.
-	 * Extend this class in any new controllers:
-	 *     class Home extends BaseController
-	 *
-	 * For security be sure to declare any new methods as protected or private.
-	 */
-	abstract class BaseController extends Controller
-	{
-	    /**
-	     * Instance of the main Request object.
-	     *
-	     * @var CLIRequest|IncomingRequest
-	     */
-	    protected $request;
-	
-	    /**
-	     * An array of helpers to be loaded automatically upon
-	     * class instantiation. These helpers will be available
-	     * to all other controllers that extend BaseController.
-	     *
-	     * @var array
-	     */
-	    protected $helpers = [];
-	    public $catalogosSAT;
-	    public $unidadesSAT;
-	    /**
-	     * Be sure to declare properties for any property fetch you initialized.
-	     * The creation of dynamic property is deprecated in PHP 8.2.
-	     */
-	    // protected $session;
-	
-	    /**
-	     * Constructor.
-	     */
-	    public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
-	    {
-	        // Do Not Edit This Line
-	        parent::initController($request, $response, $logger);
-	
-	        // Preload any models, libraries, etc, here.
-	
-	        // E.g.: $this->session = \Config\Services::session();
-	        
-	        date_default_timezone_set("America/Mazatlan");
-	
-		//ADD
-	        $dsn = "sqlite:".ROOTPATH."writable/database/catalogossat.db";
-	        $factory = new Factory();
-	        $satCatalogos = $factory->catalogosFromDsn($dsn);
-	        $this->catalogosSAT = $satCatalogos;
-	        
-	       
-	       
-	    }
-	}
-
- 
-### Make folder and download Database SAT Catalogs
-* Download and uncompress the file https://github.com/phpcfdi/resources-sat-catalogs/releases/latest/download/catalogs.db.bz2
-* Put in the folder writable/database/catalogossat.db
-
-### Make the menu
-![image](https://github.com/user-attachments/assets/9357327f-3188-4895-9a6e-d0fc379787ba)
-
-
+![image](https://github.com/user-attachments/assets/ab493d62-444f-449f-8330-e87657eaa549)
 
 
 # Ready
+
+![image](https://github.com/user-attachments/assets/da64c785-f4e5-4674-aee6-02dffd2e8978)
+
+![image](https://github.com/user-attachments/assets/7757cb01-89d0-49a9-a53a-b40fbb7bac62)
+
 
 
 Usage
