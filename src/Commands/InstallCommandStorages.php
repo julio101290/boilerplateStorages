@@ -1,6 +1,6 @@
 <?php
 
-namespace julio101290\boilerplatequotes\Commands;
+namespace julio101290\boilerplatestorages\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use Config\Database;
