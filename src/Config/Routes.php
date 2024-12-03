@@ -37,9 +37,9 @@ $routes->group('admin', function ($routes) {
                 );
     
     $routes->post('almacen/activarDesactivar'
-    , 'StoragesController::activarDesactivar'
-    ,['namespace' => 'julio101290\boilerplatestorages\Controllers']
-    );
+                , 'StoragesController::activarDesactivar'
+                ,['namespace' => 'julio101290\boilerplatestorages\Controllers']
+                );
 
 
 });
