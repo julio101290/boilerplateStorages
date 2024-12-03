@@ -72,7 +72,7 @@ class InstallCommandStorages extends BaseCommand
             $this->call('migrate');
             // then seed data
             $seeder = Database::seeder();
-            $seeder->call('julio101290\boilerplatecompanies\Database\Seeds\BoilerplateStorages');
+            $seeder->call('julio101290\boilerplatestorages\Database\Seeds\BoilerplateStorages');
         } catch (\Exception $e) {
             $this->showError($e);
         }
