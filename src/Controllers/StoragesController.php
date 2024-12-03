@@ -8,6 +8,7 @@ use julio101290\boilerplatelog\Models\LogModel;
 use CodeIgniter\API\ResponseTrait;
 use julio101290\boilerplatecompanies\Models\EmpresasModel;
 use julio101290\boilerplatestorages\Models\UsuariosAlmacenModel;
+use julio101290\boilerplatestorages\Models\StoragesModel;
 
 class StoragesController extends BaseController {
 
