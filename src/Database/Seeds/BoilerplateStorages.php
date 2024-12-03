@@ -40,7 +40,7 @@ class BoilerplateStorages extends Seeder {
         $this->authorize->createPermission('storages-permission', 'Permissions for storages');
 
         // Assign Permission to user
-        $this->authorize->addPermissionToUser('storages-permisos', 1);
+        $this->authorize->addPermissionToUser('storages-permission', 1);
 
     }
 
