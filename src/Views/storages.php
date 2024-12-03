@@ -37,9 +37,9 @@
                                 <th><?= lang('storages.fields.code') ?></th>
                                 <th><?= lang('storages.fields.name') ?></th>
 
-                                <th><?= lang('storages.fields.created_at') ?></th>
-                                <th><?= lang('storages.fields.updated_at') ?></th>
-                                <th><?= lang('storages.fields.deleted_at') ?></th>
+                                <th><?= lang('storages.fields.Creado') ?></th>
+                                <th><?= lang('storages.fields.Actualizado') ?></th>
+                                <th><?= lang('storages.fields.Eliminado') ?></th>
 
                                 <th><?= lang('storages.fields.actions') ?> </th>
 

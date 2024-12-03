@@ -19,9 +19,9 @@ $almacenes["fields"]["costCenter"] = "CCO";
 $almacenes["fields"]["exist"] = "Exist";
 $almacenes["fields"]["list"] = "Lista";
 $almacenes["fields"]["main"] = "Principal";
-$almacenes["fields"]["Creado"] = "Created_at";
-$almacenes["fields"]["Actualizado"] = "Updated_at";
-$almacenes["fields"]["Eliminado"] = "Deleted_at";
+$almacenes["fields"]["Creado"] = "Fecha Creación";
+$almacenes["fields"]["Actualizado"] = "Fecha Actualizacion";
+$almacenes["fields"]["Eliminado"] = "Fecha Eliminación";
 
 $almacenes["fields"]["actions"] = "Acciones";
 $almacenes["msg"]["msg_insert"] = "Registro agregado correctamente.";
