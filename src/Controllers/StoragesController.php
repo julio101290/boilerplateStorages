@@ -240,7 +240,7 @@ class StoragesController extends BaseController {
         } else {
 
             //INSERTA SI  NO EXISTE
-            if ($this->usuariosPorAlmacen->save($datos) === false) {
+            if ($this->usuariosPorAlmacen->insert($datos) === false) {
 
                 $errores = $this->usuariosPorAlmacen->errors();
 
