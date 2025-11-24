@@ -16,7 +16,7 @@ class StoragesModel extends Model {
         , 'idEmpresa'
         , 'name'
         , 'type'
-        , 'brachoffice'
+        , 'idBranchOffice'
         , 'company'
         , 'costCenter'
         , 'exist'
@@ -34,7 +34,7 @@ class StoragesModel extends Model {
         'code' => 'string|max_length[16]',
         'name' => 'string|max_length[256]',
         'type' => 'permit_empty|string|max_length[64]',
-        'brachoffice' => 'permit_empty|integer',
+        'idBranchOffice' => 'permit_empty|integer',
         'company' => 'permit_empty|integer',
         'costCenter' => 'permit_empty|integer',
         'exist' => 'permit_empty|integer',
@@ -54,7 +54,7 @@ class StoragesModel extends Model {
                         a.idEmpresa AS idEmpresa,
                         a.name AS name,
                         a.type AS type,
-                        a.brachoffice AS brachoffice,
+                        a.idBranchOffice AS idBranchOffice,
                         a.company AS company,
                         a.costCenter AS costCenter,
                         a.exist AS exist,

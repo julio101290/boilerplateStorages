@@ -71,6 +71,22 @@ class StoragesController extends BaseController {
     public function getStorages() {
         $idStorages = $this->request->getPost("idStorages");
         $datosStorages = $this->storages->find($idStorages);
+
+        // GET DATA BRANCHOFFICE
+
+        $branchOfficeData = $this->sucursales
+                ->select("name")
+                ->where("id", $datosStorages["idBranchOffice"])
+                ->first();
+        if (isset($branchOfficeData)) {
+
+            $datosStorages["nameBranchOffice"] = $branchOfficeData["name"];
+        }else{
+            
+             $datosStorages["nameBranchOffice"] = "";
+        }
+
+
         echo json_encode($datosStorages);
     }
 
@@ -210,20 +226,16 @@ class StoragesController extends BaseController {
             $empresasID = array_column($titulos["empresas"], "id");
         }
 
-        if($almacen == 0){
-            
-            $datosAlmacen["idEmpresa"] = 0;
-            
-        }else{
-            
-            $datosAlmacen = $this->storages->find($almacen);
-            
-        }
-        
+        if ($almacen == 0) {
 
-        $usuarios = $this->usuariosPorAlmacen->mdlAlmacenesPorUsuario($almacen, $empresasID,$datosAlmacen["idEmpresa"]);
-        
-        
+            $datosAlmacen["idEmpresa"] = 0;
+        } else {
+
+            $datosAlmacen = $this->storages->find($almacen);
+        }
+
+
+        $usuarios = $this->usuariosPorAlmacen->mdlAlmacenesPorUsuario($almacen, $empresasID, $datosAlmacen["idEmpresa"]);
 
         return \Hermawan\DataTables\DataTable::of($usuarios)->toJson(true);
     }
@@ -249,8 +261,8 @@ class StoragesController extends BaseController {
 
             echo "ok";
         } else {
-            
-            unset($datos["id"]); 
+
+            unset($datos["id"]);
 
             //INSERTA SI  NO EXISTE
             if ($this->usuariosPorAlmacen->insert($datos) === false) {
@@ -270,5 +282,4 @@ class StoragesController extends BaseController {
             echo "ok";
         }
     }
-
 }

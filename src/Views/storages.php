@@ -148,7 +148,7 @@
         datos.append("code", code);
         datos.append("name", name);
         datos.append("type", type);
-        datos.append("brachoffice", brachoffice);
+        datos.append("idBranchOffice", brachoffice);
         datos.append("company", company);
         datos.append("costCenter", costCenter);
         datos.append("exist", exist);
@@ -231,13 +231,20 @@
                 $("#code").val(respuesta["code"]);
                 $("#name").val(respuesta["name"]);
                 $("#type").val(respuesta["type"]);
-                $("#brachoffice").val(respuesta["brachoffice"]);
-                $("#company").val(respuesta["company"]);
+                $("#idEmpresaStorage").val(respuesta["idEmpresa"]);
+           
+                
+                 var newOptionBranchOffice = new Option(respuesta["idBranchOffice"] + ' ' + respuesta["nameBranchOffice"], respuesta["idBranchOffice"], true, true);
+                $('#brachoffice').append(newOptionBranchOffice).trigger('change');
+                $("#brachoffice").val(newOptionSubCategory["idBranchOffice"]);
+                
+                
+                $("#company").val(respuesta["company"]).trigger("change");
                 $("#costCenter").val(respuesta["costCenter"]);
                 $("#exist").val(respuesta["exist"]);
                 $("#list").val(respuesta["list"]);
                 $("#main").val(respuesta["main"]);
-                $("#idEmpresaStorage").val(respuesta["idEmpresa"]);
+                $
                 $("#idEmpresaStorage").trigger("change");
                 $("#inicioInventario").val(respuesta["inicioOperacion"]);
 

@@ -23,12 +23,10 @@
                                 <select class="form-control idEmpresa form-controlProducts" name="idEmpresaStorage" id="idEmpresaStorage" style="width:80%;">
 
                                     <?php
-
                                     foreach ($empresas as $key => $value) {
 
                                         echo "<option value='$value[id]'>$value[id] - $value[nombre] </option>  ";
                                     }
-
                                     ?>
 
                                 </select>
@@ -70,24 +68,22 @@
                             </div>
                         </div>
                     </div>
-                    <div class="form-group row" hidden>
+                    <div class="form-group row">
                         <label for="brachoffice" class="col-sm-2 col-form-label"><?= lang('storages.fields.brachoffice') ?></label>
                         <div class="col-sm-10">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fas fa-pencil-alt"></i></span>
                                 </div>
-                                <select type="text" name="brachoffice" id="brachoffice" class="form-control <?= session('error.brachoffice') ? 'is-invalid' : '' ?>" value="<?= old('brachoffice') ?>" placeholder="<?= lang('storages.fields.brachoffice') ?>" autocomplete="off">
-                                    
+                                <select type="text" name="brachoffice" id="brachoffice" style="width: 90%;" class="form-control <?= session('error.brachoffice') ? 'is-invalid' : '' ?>" value="<?= old('brachoffice') ?>" placeholder="<?= lang('storages.fields.brachoffice') ?>" autocomplete="off">
+
                                     <option value="0" selected=""> Select brachoffice  </office>
-                                    <?php
-                                    foreach ($sucursales as $key => $value) {
+<?php
+foreach ($sucursales as $key => $value) {
 
-                                        echo "<option value='$value[id]'>$value[key] - $value[name]</option>";
-                                    }
-
-
-                                    ?>
+    echo "<option value='$value[id]'>$value[key] - $value[name]</option>";
+}
+?>
                                 </select>
                             </div>
                         </div>
@@ -180,7 +176,7 @@
     $("#idEmpresa").trigger("change");
 
 
-    $(document).on('click', '.btnAddStorages', function(e) {
+    $(document).on('click', '.btnAddStorages', function (e) {
 
 
 
@@ -207,7 +203,7 @@
 
 
 
-    $(document).on('click', '.btnEditStorages', function(e) {
+    $(document).on('click', '.btnEditStorages', function (e) {
 
 
         var idStorages = $(this).attr("idStorages");
@@ -218,6 +214,38 @@
         $("#idStorages").val(idStorages);
         $("#btnGuardarStorages").removeAttr("disabled");
 
+    });
+
+
+
+    $("#brachoffice").select2({
+        ajax: {
+            url: "<?= site_url('admin/sucursales/getSucursalesAjax') ?>",
+            type: "post",
+            dataType: 'json',
+            delay: 250,
+            data: function (params) {
+                // CSRF Hash
+                var csrfName = $('.txt_csrfname').attr('name'); // CSRF Token name
+                var csrfHash = $('.txt_csrfname').val(); // CSRF hash
+                var idEmpresa = $('.idEmpresa').val(); // CSRF hash
+
+                return {
+                    searchTerm: params.term, // search term
+                    [csrfName]: csrfHash, // CSRF Token
+                    idEmpresa: idEmpresa // search term
+                };
+            },
+            processResults: function (response) {
+
+                // Update CSRF Token
+                $('.txt_csrfname').val(response.token);
+                return {
+                    results: response.data
+                };
+            },
+            cache: true
+        }
     });
 </script>
 
