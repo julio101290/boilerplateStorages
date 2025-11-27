@@ -22,7 +22,7 @@ class UsuariosAlmacenModel extends Model {
     public function mdlAlmacenesPorUsuario($almacen, $empresasID, $idEmpresa) {
 
         $db = \Config\Database::connect();
-        
+
         if ($db->DBDriver === 'pgsql' || $db->DBDriver === 'PDO\Postgres' || $db->DBDriver === 'Postgre') {
             $result = $this->db->table('users a')
                     ->select(
@@ -57,35 +57,28 @@ class UsuariosAlmacenModel extends Model {
         } else {
 
             $result = $this->db->table('users a')
-                    ->select(
-                            'COALESCE(a.id, 0) AS id,
-                            a.username as username,
-                            b.idEmpresa AS idEmpresa,
-                            ' . (int) $almacen . ' AS idStorage,
+                    ->select("
+        COALESCE(a.id, 0) AS id,
+        a.username AS username,
+        b.idEmpresa AS idEmpresa,
+        " . (int) $almacen . " AS idStorage,
 
-                            COALESCE((
-                                SELECT z.status
-                                FROM usuarios_almacen z
-                                WHERE z.idUsuario = a.id
-                                  AND z.idStorage = ' . (int) $almacen . '
-                                  
-                                  AND b.idEmpresa = ' . (int) $idEmpresa . '
-                                LIMIT 1
-                            ), \'off\') AS status,
-
-                            COALESCE((
-                                SELECT z.id
-                                FROM usuarios_almacen z
-                                WHERE z.idUsuario = a.id
-                                  AND z.idStorage = ' . (int) $almacen . '
-                                  
-                                  AND b.idEmpresa = ' . (int) $idEmpresa . '
-                                LIMIT 1
-                            ), 0) AS idalmacenusuario '
+        COALESCE(z.status, 'off') AS status,
+        COALESCE(z.id, 0) AS idalmacenusuario
+    ")
+                    ->join(
+                            'usuariosempresa b',
+                            'a.id = b.idUsuario AND b.idEmpresa = ' . (int) $idEmpresa,
+                            'left'
                     )
-                    ->join('usuariosempresa b', 'a.id = b.idUsuario')
-                    ->whereIn('b.id', $empresasID)
-                    ->where("idEmpresa", $idEmpresa);
+                    ->join(
+                            'usuarios_almacen z',
+                            'z.idUsuario = a.id 
+         AND z.idStorage = ' . (int) $almacen . ' 
+         AND z.idEmpresa = ' . (int) $idEmpresa,
+                            'left'
+                    )
+                    ->whereIn('b.idEmpresa', [$idEmpresa]);   // Ajuste para no filtrar usuarios
         }
 
         return $result;
